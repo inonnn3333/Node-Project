@@ -71,7 +71,6 @@ export const applyGuardOrAdminGuard = (req, res, next) => {
 
 
 
-//* משתמש שתואם לכרטיס או אדמין
 export const guardUserOfCardOrAdmin = async (req, res, next) => {
 
     try{

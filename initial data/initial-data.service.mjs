@@ -8,9 +8,6 @@ import moment from 'moment';
 (async () => {
     const userAmount = await User.find().countDocuments();
 
-
-    
-    
     if(!userAmount) {
         const userIds = [];
 

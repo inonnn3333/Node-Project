@@ -21,5 +21,4 @@ export const cardSchema = Joi.object({
         _id: Joi.optional().allow(null, '')
     }).optional().allow(null, ''),
     likes: Joi.optional().allow(null, ''),
-
 });

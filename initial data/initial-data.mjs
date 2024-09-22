@@ -10,8 +10,8 @@ export const initialData = {
             "email": "regular@gmail.com",
             "password": "Abc!1234Abc",
             "image": {
-                "url": "",
-                "alt": ""
+                "url": "http://example.com/image1.jpg",
+                "alt": "Regular user profile image"
             },
             "address": {
                 "state": "",
@@ -22,20 +22,19 @@ export const initialData = {
                 "zip": "8"
             },
             "isBussiness": false,
-            "createAt": ""
         },
         {
             "name": {
-                "first": "business",
+                "first": "bussiness",
                 "middle": "",
                 "last": "user"
             },
             "phone": "0500000000",
-            "email": "business@gmail.com",
+            "email": "bussiness@gmail.com",
             "password": "Abc!1234Abc",
             "image": {
-                "url": "",
-                "alt": ""
+                "url": "http://example.com/image2.jpg",
+                "alt": "Business user profile image"
             },
             "address": {
                 "state": "",
@@ -46,7 +45,6 @@ export const initialData = {
                 "zip": "2"
             },
             "isBussiness": true,
-            "createAt": ""
         },
         {
             "name": {
@@ -58,8 +56,8 @@ export const initialData = {
             "email": "admin@gmail.com",
             "password": "Abc!1234Abc",
             "image": {
-                "url": "",
-                "alt": ""
+                "url": "http://example.com/image3.jpg",
+                "alt": "Admin user profile image"
             },
             "address": {
                 "state": "",
@@ -75,67 +73,67 @@ export const initialData = {
     ],
     "cards": [
         {
-            "title": "first card",
-            "subtitle": "this is the first card",
-            "description": "this is the first card in the database",
-            "phone": "0500000000",
-            "email": "firstCard@gmail.com",
-            "address": {
-                "state": "",
-                "country": "test",
-                "city": "test",
-                "street": "test",
-                "houseNumber": 3,
-                "zip": "0"
-            },
-            "image": {
-                "url": "",
-                "alt": ""
-            },
-            "web": "https://www.test.co.il",
-            "user_id": "",
+        "title": "first card",
+        "subtitle": "this is the first card",
+        "description": "this is the first card in the database",
+        "phone": "0500000000",
+        "email": "firstCard@gmail.com",
+        "address": {
+            "state": "",
+            "country": "test",
+            "city": "test",
+            "street": "test",
+            "houseNumber": "3",
+            "zip": "0"
         },
-        {
-            "title": "second card",
-            "subtitle": "this is the second card",
-            "description": "this is the second card in the database",
-            "phone": "0500000000",
-            "email": "secondCard@gmail.com",
-            "address": {
-                "state": "",
-                "country": "testagain",
-                "city": "testagain",
-                "street": "testagain",
-                "houseNumber": 5,
-                "zip": "1"
-            },
-            "image": {
-                "url": "",
-                "alt": ""
-            },
-            "web": "https://www.test.co.il",
-            "user_id": "",
+        "image": {
+            "url": "",
+            "alt": ""
         },
-        {
-            "title": "third card",
-            "subtitle": "this is the third card",
-            "description": "this is the third card in the database",
-            "phone": "0500000000",
-            "email": "thirdCard@gmail.com",
-            "address": {
-                "state": "",
-                "country": "repeat",
-                "city": "repeat",
-                "street": "repeat",
-                "houseNumber": 8,
-                "zip": "2"
-            },
-            "image": {
-                "url": "",
-                "alt": ""
-            },
-            "web": "https://www.test.co.il",
-            "user_id": "",
+        "web": "https://www.test.co.il",
+        "user_id": ""
+    },
+    {
+        "title": "second card",
+        "subtitle": "this is the second card",
+        "description": "this is the second card in the database",
+        "phone": "0500000000",
+        "email": "secondCard@gmail.com",
+        "address": {
+            "state": "",
+            "country": "testagain",
+            "city": "testagain",
+            "street": "testagain",
+            "houseNumber": "5",
+            "zip": "1"
+        },
+        "image": {
+            "url": "",
+            "alt": ""
+        },
+        "web": "https://www.test.co.il",
+        "user_id": ""
+    },
+    {
+        "title": "third card",
+        "subtitle": "this is the third card",
+        "description": "this is the third card in the database",
+        "phone": "0500000000",
+        "email": "thirdCard@gmail.com",
+        "address": {
+            "state": "",
+            "country": "repeat",
+            "city": "repeat",
+            "street": "repeat",
+            "houseNumber": "8",
+            "zip": "2"
+        },
+        "image": {
+            "url": "",
+            "alt": ""
+        },
+        "web": "https://www.test.co.il",
+        "user_id": ""
         }
     ]
 }

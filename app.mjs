@@ -7,7 +7,6 @@ import path from 'path';
 import dotenv from 'dotenv';
 import morgan from "morgan";
 
-// טעינה של הספריה שעובדת עם קובץ אי-אנ-וי
 dotenv.config();
 
 
@@ -25,11 +24,9 @@ main().catch(err => console.error(chalk.red(err)));
 
 export const app = express();
 
-// הדאטה שאני הולך לקלוט יהיה בקובץ ג'ייסון
 app.use(express.json());
 
 
-// ספריית מורגן עבור הלוגים
 app.use(morgan(function (tokens, req, res) {
     const status = tokens.status(req, res)
     
@@ -43,7 +40,6 @@ app.use(morgan(function (tokens, req, res) {
     }
 ));    
 
-// אם לא נמצא ניתוב, הניתוב ילך לתיקיית פאבליק
 app.use(express.static("public"));
 
 app.use(cors({
@@ -55,14 +51,12 @@ app.use(cors({
 
 
 
-// באיזה פורט אני משתמש
 app.listen(process.env.PORT, () => {
     console.log("Server is running on port 5555");
 
 });
 
 
-// נקודת קצה בסיסית
 app.get('/', (req, res) => {
     res.send({
         messege: "main!"

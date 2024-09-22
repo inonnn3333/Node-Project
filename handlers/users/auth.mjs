@@ -3,27 +3,16 @@ import { User } from "./users.model.mjs";
 import bcrypt from "bcrypt";
 import moment from 'moment';
 import jwt from "jsonwebtoken"
-import { UserLogin } from "./users.joi.mjs";
+import { UserSignup } from "./users.joi.mjs";
 
 app.post('/users/login', async (req, res) => {
     const { email, password } = req.body;
 
-
-    const validate = UserLogin.validate({email, password});
-    if (validate.error) {
-        console.log(validate.error.details[0].message);
-        
-        return res.status(403).send(validate.error.details[0].message);
-
-    }
-    
-    //*שליפת היוזר ע"י חיפוש
     const user = await User.findOne({ email });
 
     if (!user) {
         return res.status(403).send({"message":"Email or password is inncorect"});
     }
-    //* אם אין סיסמא או שאין השוואה בין הסיסמאות
     if (!user.password || !await bcrypt.compare(password, user.password)) {
         return res.status(403).send({"message":"Email or password is inncorect"});
     }
@@ -39,48 +28,50 @@ app.post('/users/login', async (req, res) => {
     res.send(token);
 });
 
+
+
 app.post('/users', async (req, res) => {
+    try {
+        const {
+            name: {first, middle, last},
+            phone,
+            email,
+            password,
+            image: {url, alt},
+            address: {state, country, city, street, houseNumber, zip},
+            isAdmin,
+            isBussiness,
+            createAt,
+        } = req.body;
 
-    const {
-        name: {first, middle, last},
-        phone,
-        email,
-        password,
-        image: {url, alt},
-        address: {state, country, city, street, houseNumber, zip},
-        isAdmin,
-        isBussiness,
-        createAt,
-    } = req.body;
+        const validate = UserSignup.validate(req.body);
+        if (validate.error) {
+            return res.status(400).send({"ValidateError": validate.error.details[0].message.replace(/"/g, '')});
+        }
 
-    // const validate = UserSignup.validate(req.body, {allowUnknown: true});
-    // if (validate.error) {
-    //     console.log(validate.error.details[0].message);
-        
-    //     return res.status(403).send(validate.error.details[0].message);
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(403).send({"message": "Email already exists"});
+        }
 
-    // }
+        const user = new User({
+            name: {first, middle, last},
+            phone,
+            email,
+            password: await bcrypt.hash(password, 10),
+            image: {url, alt},
+            address: {state, country, city, street, houseNumber, zip},
+            isAdmin,
+            isBussiness,
+            createAt: moment().format('YYYY-MM-DD HH:mm'),
+        });
 
-    //*אם האימייל כבר קיים, היינו שיש יוזר קיים, אז נחזיר הודעה שגיאה
-    if (await User.findOne({ email })) {
-        return res.status(403).send({"message":"Email is exist"});
+        const newUser = await user.save();
+
+        res.send(newUser);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({"message": "Internal Server Error"});
     }
-
-    const user = new User({
-        name: {first, middle, last},
-        phone,
-        email,
-        password: await bcrypt.hash(password, 10),
-        image: {url, alt},
-        address: {state, country, city, street, houseNumber, zip},
-        isAdmin,
-        isBussiness,
-        createAt: moment().format('YYYY-MM-DD HH:mm'),
-    })
-
-    // שמירת נתוני המשתמש החדש במשתנה+ שליחת היוזר החדש לדאטה
-    const newUser = await user.save();
-
-    // שליחת רספונס למשתמש
-    res.send(newUser);
 });
+

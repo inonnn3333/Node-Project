@@ -26,12 +26,13 @@ const schema = new Schema({
     image: Image,
     address: Address,
     likes: {
+        
         type: [Schema.Types.ObjectId],
         default: []
     },
     user_id: {
         type: Schema.Types.ObjectId,
-        required: true,
+        // required: true,
     }
 });
 

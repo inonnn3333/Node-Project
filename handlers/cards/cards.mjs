@@ -4,14 +4,12 @@ import { Card } from "./cards.model.mjs";
 import { getUser } from "../../guard.mjs";
 import { cardSchema } from "./cards.joi.mjs";
 
-//* מביא את כל הכרטיסים
 app.get('/cards', async (req, res) => {
     res.send(await Card.find());
 
 });
 
 
-//* הכרטיסים שלי - השייכים לאותו יוזר
 app.get('/cards/my-cards', guard, async (req, res) => {
     const user = getUser(req);
     res.send(await Card.find({user_id: user._id}));
@@ -19,7 +17,6 @@ app.get('/cards/my-cards', guard, async (req, res) => {
 });
 
 
-//* הצגת כרטיס יחיד
 app.get('/cards/:id', async (req, res) => {
     try {
         const card = await Card.findById(req.params.id);
@@ -67,8 +64,8 @@ app.post('/cards', bussinessGuard, async (req, res) => {
             return res.status(403).send({"message": "Card is exist"});
         }
 
-        const newCard = await card.save(); // שמירת הכרטיס בדאטהבייס
-        res.send(newCard); // שליחת הכרטיס שנשמר כתגובה
+        const newCard = await card.save();
+        res.send(newCard);
     } catch (error) {
         console.error('Error creating card:', error);
         res.status(500).send('Failed to create card');
@@ -77,7 +74,6 @@ app.post('/cards', bussinessGuard, async (req, res) => {
 
 
 
-//* שינוי כרטיס
 app.put('/cards/:id', guardUserOfCard, async (req, res) => {
     try {
         const {
@@ -108,12 +104,10 @@ app.put('/cards/:id', guardUserOfCard, async (req, res) => {
         if (validate.error) {
             return res.status(403).send(validate.error.details[0].message);
         }
-        // אם כרטיס לא נמצא בדאטה
         if (!card) {
             return res.status(404).send({ "message": "Card not found" });
         }
 
-        // עדכון השדות בכרטיס
         card.title = title || card.title;
         card.subtitle = subtitle || card.subtitle;
         card.description = description || card.description;
@@ -144,7 +138,6 @@ app.put('/cards/:id', guardUserOfCard, async (req, res) => {
 
 
 
-//* לייק
 app.patch("/cards/:id", guard, async (req, res) => {
     try {
         const card = await Card.findById(req.params.id);
@@ -175,7 +168,6 @@ app.patch("/cards/:id", guard, async (req, res) => {
 
 
 
-//* מחיקת כרטיס
 app.delete('/cards/:id', guardUserOfCardOrAdmin, async (req, res) => {
     try {
         const card = await Card.findByIdAndDelete(req.params.id);
