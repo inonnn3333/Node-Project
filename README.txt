@@ -1,47 +1,43 @@
+## Project Description:
+Server-side development for a web application that includes a site management system allowing business users to publish, edit, and delete content.
 
-# פרויקט מסכם מודול Node.js
+## Key Features:
+- User registration and login.
+- Creation, updating, and deletion of cards.
+- Role-based permission management (regular user, business user, and admin).
+- Saving cards and adding likes.
+- JWT-based user authentication system.
 
-## תיאור הפרויקט:
-פיתוח צד שרת לאפליקציה אינטרנטית הכוללת מערכת ניהול אתר המאפשרת למשתמשים עסקיים לפרסם תוכן לערוך ולמחוק אותו.
-
-## תכונות עיקריות:
-- רישום והתחברות משתמשים.
-- יצירה, עדכון ומחיקת כרטיסים.
-- ניהול הרשאות מבוסס תפקידים (משתמש רגיל, עסקי, ומנהל).
-- שמירת כרטיסים והוספת לייקים.
-- מערכת גישת משתמשים מבוססת JWT לאימות.
-
-## טכנולוגיות:
+## Technologies:
 - Node.js
 - Express
 - MongoDB
 - mongoose
 - Cors
-- Joi לבדיקת תקינות נתונים
-- JWT לאימות משתמשים
-- bcrypt להצפנת סיסמאות
-- Chalk לעיצוב לוגים
-- Moment לתאריך ושעה
-- Morgan לניהול לוגים
+- Joi for data validation
+- JWT for user authentication
+- bcrypt for password encryption
+- Chalk for styled logs
+- Moment for date and time
+- Morgan for log management
 
 ## API:
-### משתמשים:
-- **POST** `/users` - רישום משתמש חדש
-- **POST** `/users/login` - התחברות משתמש
-- **GET** `/users` - קבלת כל המשתמשים (רק מנהל)
-- **GET** `/users/:id` - קבלת פרטי משתמש מסוים (למשתמש עצמו או למנהל)
-- **PUT** `/users/:id` - עדכון פרטי משתמש (למשתמש עצמו)
-- **DELETE** `/users/:id` - מחיקת משתמש (למשתמש עצמו או למנהל)
+### Users:
+- **POST** `/users` - Register a new user
+- **POST** `/users/login` - User login
+- **GET** `/users` - Get all users (admin only)
+- **GET** `/users/:id` - Get specific user details (for the user themselves or an admin)
+- **PUT** `/users/:id` - Update user details (for the user themselves)
+- **DELETE** `/users/:id` - Delete a user (for the user themselves or an admin)
 
-### כרטיסים:
-- **POST** `/cards` - יצירת כרטיס חדש (למשתמש עסקי בלבד)
-- **GET** `/cards` - קבלת כל הכרטיסים
-- **GET** `/cards/my-cards` - קבלת הכרטיסים של המשתמש המחובר
-- **GET** `/cards/:id` - קבלת כרטיס מסוים
-- **PUT** `/cards/:id` - עדכון כרטיס (למשתמש שיצר את הכרטיס)
-- **PATCH** `/cards/:id` - מתן/הסרת לייק לכרטיס
-- **DELETE** `/cards/:id` - מחיקת כרטיס (למשתמש שיצר את הכרטיס או למנהל)
+### Cards:
+- **POST** `/cards` - Create a new card (for business users only)
+- **GET** `/cards` - Get all cards
+- **GET** `/cards/my-cards` - Get the logged-in user's cards
+- **GET** `/cards/:id` - Get a specific card
+- **PUT** `/cards/:id` - Update a card (for the user who created the card)
+- **PATCH** `/cards/:id` - Add/remove a like on a card
+- **DELETE** `/cards/:id` - Delete a card (for the user who created the card or an admin)
 
-## ניהול שגיאות:
-במקרה שעמוד לא נמצא, המשתמש ינותב לעמוד 404 מותאם אישית.
-
+## Error Handling:
+In case a page is not found, the user will be redirected to a custom 404 page.
